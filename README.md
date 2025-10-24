@@ -8,7 +8,7 @@ No machine learning background needed.
 
 ## What This Project Does
 
-Mini DocsGPT can:
+DocsGPT can:
 - Read your Markdown documentation files (.md)
 - Break them into smaller chunks
 - Index them so they can be searched efficiently
@@ -32,54 +32,70 @@ These instructions will guide you through setting it up on your own computer.
 ### 1. Install Python
 
 You’ll need Python 3.10 or newer. To check if it’s installed, open a terminal and type:
-```bash
-python3 --version
-If it’s missing, download it from https://www.python.org/downloads/
+`python3 --version`
+If it’s missing, download it from `https://www.python.org/downloads/`
 .
 
-2. Set Up Your Project Folder
+### 2. Set Up Your Project Folder
 
 Open your terminal and create a folder for the project:
+```
 mkdir docs-gpt
 cd docs-gpt
+```
 
-3. Create a Virtual Environment
+### 3. Create a Virtual Environment
 
 A “virtual environment” keeps your project’s Python packages isolated from your system.
+
+```
 python3 -m venv venv
 source venv/bin/activate
-You should now see (venv) at the start of your terminal prompt.
+```
+You should now see `(venv)` at the start of your terminal prompt.
 
-4. Install Dependencies
+### 4. Install Dependencies
 
 These are the small Python libraries this project uses.
+```
 pip install langchain langchain-community langchain-text-splitters scikit-learn gradio
-5. Add Example Docs
+```
+### 5. Add Example Docs
 
-Create some simple Markdown files inside data/docs/:
+Create some simple Markdown files inside `data/docs/`:
+```
 mkdir -p data/docs
+```
 then add your markdown files.
-6. Index Your Documents
+### 6. Index Your Documents
 
-This step builds a local search index using utils/ingest_docs.py.
+This step builds a local search index using `utils/ingest_docs.py`.
+
+```
 python3 utils/ingest_docs.py
-you should see
-Indexed 6 text chunks into utils/vectorstore.pkl
+```
 
-7. Launch the Web App
+you should see
+`Indexed 6 text chunks into utils/vectorstore.pkl`
+
+### 7. Launch the Web App
 
 Now run:
+
+```
 python3 app.py
+```
 
 Gradio will start a local web server and show a link such as:
+```
 Running on local URL: http://127.0.0.1:7860
+```
 
-8. Ask a Question
+### 8. Ask a Question
 
 Try typing:
 
-How does authentication work?
-
+`How does authentication work?`
 
 You’ll get a short summary and the source text from your docs.
 
@@ -87,45 +103,41 @@ How It Works (Simplified)
 
 Here’s what’s happening behind the scenes:
 
-Ingestion (utils/ingest_docs.py)
+* Ingestion (`utils/ingest_docs.py`)
 
-Reads all .md files under data/docs/
+* Reads all `.md` files under `data/docs/`
 
-Splits them into small chunks
+* Splits them into small chunks
 
-Turns them into searchable vectors using TF-IDF
+* Turns them into searchable vectors using `TF-IDF`
 
-Saves everything into utils/vectorstore.pkl
+* Saves everything into `utils/vectorstore.pkl`
 
-Querying (app.py or rag_query.py)
+* Querying (`app.py` or `rag_query.py`)
 
-When you ask a question, your query is vectorized the same way
+When you ask a question, your query is vectorized the same way and the system finds the most similar text chunks. Then, a simple summarizer extracts the key lines to form a natural answer.
 
-The system finds the most similar text chunks
-
-A simple summarizer extracts the key lines to form a natural answer
-
-Customize It
+## Customize It
 
 You can:
 
-Replace data/docs/ with your own documentation
+* Replace data/docs/ with your own documentation
 
-Change the chunk size in ingest_docs.py for finer or coarser search
+* Change the chunk size in `ingest_docs.py` for finer or coarser search
 
-Modify the summarizer in rag_query.py to improve phrasing
+* Modify the summarizer in `rag_query.py` to improve phrasing
 
-Deploy this to Hugging Face Spaces (it works perfectly there)
-Credits
+* Deploy this to Hugging Face Spaces (it works perfectly there)
+
+## Credits
 
 Built with:
 
-LangChain
+* LangChain
 
-Scikit-learn
+* Scikit-learn
 
-Gradio
+* Gradio
 
 Created as a learning project for understanding the fundamentals of RAG systems without needing cloud APIs or complex machine learning setups.
 
-Mini DocsGPT — your first step into Retrieval-Augmented Generation.
