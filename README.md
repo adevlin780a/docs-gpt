@@ -139,4 +139,4 @@ Built with:
 
 * Gradio
 
-Created as a learning project for understanding the fundamentals of RAG systems without needing cloud APIs or complex machine learning setups.Licensed under the MIT License — see LICENSE for details.
+Created as a learning project for understanding the fundamentals of RAG systems without needing cloud APIs or complex machine learning setups. Licensed under the MIT License — see LICENSE.md for details.
